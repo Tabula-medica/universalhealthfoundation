@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jarvis — Universal Health Foundation</title>
+<meta name="description" content="Jarvis helps you find Universal Health Foundation programs: Universal Health Radio, katha.kids and noorjyoti." />
+<style>
+  :root{--ink:#1a1633;--ink2:#4a4570;--purple:#6b2f8e;--gold:#e8a53a;--bg:#fbf8fd;--card:#fff;--line:#ece4f2}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}
+  .brand span{color:var(--purple)}
+  nav a.link{color:var(--ink2);text-decoration:none;font-size:15px;font-weight:500}
+  h1{font-size:40px;letter-spacing:-1px;margin:48px 0 6px}
+  h2{font-size:20px;margin:40px 0 14px}
+  .sub{color:var(--ink2);font-size:17px}
+  form{display:flex;gap:10px;margin:26px 0 14px}
+  input{flex:1;font:inherit;font-size:16px;padding:13px 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+  input:focus{outline:2px solid var(--purple);outline-offset:1px}
+  button,.btn{font:inherit;font-weight:600;font-size:15px;background:var(--purple);color:#fff;border:0;border-radius:10px;padding:12px 22px;cursor:pointer;text-decoration:none;display:inline-block}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .chips span{font-size:13px;color:var(--ink2);margin-right:4px}
+  .chip{background:#f0e4f6;color:var(--purple);border:0;border-radius:99px;padding:7px 14px;font-size:14px;font-weight:600;cursor:pointer}
+  .result{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:20px}
+  .result[hidden]{display:none}
+  .result p{margin-bottom:10px}
+  .result .disc{background:#fff8e6;border:1px solid #f0dda0;border-radius:10px;padding:10px 14px;font-size:14px;color:#6b5518}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink);display:block}
+  .tile:hover{box-shadow:0 10px 26px rgba(107,47,142,.12)}
+  .tile .ic{font-size:24px}
+  .tile strong{display:block;margin:6px 0 2px}
+  .tile small{color:var(--ink2);font-size:13.5px}
+  .brief{list-style:none;display:grid;gap:10px}
+  .brief li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:15px}
+  .fine{font-size:13px;color:var(--ink2);margin-top:10px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0;color:var(--ink2);font-size:13.5px}
+  @media(max-width:600px){h1{font-size:32px}form{flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+  <a class="brand" href="index.html">Universal Health <span>Foundation</span></a>
+  <a class="link" href="index.html" data-i18n="back"></a>
+</nav></div></header>
+
+<main class="wrap">
+  <h1 data-i18n="page.heading"></h1>
+  <p class="sub" data-i18n="page.sub"></p>
+
+  <form id="bar" autocomplete="off">
+    <label for="cmd" class="sr" style="position:absolute;left:-9999px" data-i18n="bar.label"></label>
+    <input id="cmd" type="text" data-i18n-placeholder="bar.placeholder" />
+    <button type="submit" data-i18n="bar.submit"></button>
+  </form>
+  <div class="chips" id="chips"><span data-i18n="suggest.heading"></span></div>
+
+  <div class="result" id="result" role="status" aria-live="polite" hidden>
+    <p id="reply"></p>
+    <p class="disc" id="disc" hidden></p>
+    <a class="btn" id="go" hidden></a>
+  </div>
+
+  <h2 data-i18n="briefing.heading"></h2>
+  <ul class="brief" id="brief"></ul>
+
+  <h2 data-i18n="skills.heading"></h2>
+  <div class="grid" id="skills"></div>
+
+  <p class="fine" data-i18n="privacy"></p>
+  <p class="fine" data-i18n="health.disclaimer"></p>
+  <p class="fine" data-i18n="licensing"></p>
+</main>
+
+<footer><div class="wrap">© 2026 Universal Health Foundation · a nonprofit in formation</div></footer>
+
+<script src="assets/jarvis-intents.js"></script>
+<script>
+(function () {
+  var J = window.JarvisIntents;
+  var locale = (document.documentElement.lang || 'en').slice(0, 2);
+  var t = function (k) { return J.t(k, locale); };
+
+  document.title = t('page.title');
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) { el.placeholder = t(el.getAttribute('data-i18n-placeholder')); });
+
+  var input = document.getElementById('cmd');
+  var result = document.getElementById('result');
+  var reply = document.getElementById('reply');
+  var disc = document.getElementById('disc');
+  var go = document.getElementById('go');
+
+  function run(text) {
+    var r = J.routeCommand(text, locale);
+    if (!r) return;
+    result.hidden = false;
+    reply.textContent = r.reply;
+    disc.hidden = !r.disclaimer;
+    disc.textContent = r.disclaimer || '';
+    go.hidden = !r.href;
+    if (r.href) { go.href = r.href; go.textContent = t('result.open') + ': ' + r.label; }
+  }
+
+  document.getElementById('bar').addEventListener('submit', function (e) { e.preventDefault(); run(input.value); });
+
+  var chips = document.getElementById('chips');
+  J.SUGGESTIONS.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = t(s.key);
+    b.addEventListener('click', function () { input.value = t(s.key); run(s.command); });
+    chips.appendChild(b);
+  });
+
+  // Briefing: built from the programs already published on the home page (no backend exists).
+  var brief = document.getElementById('brief');
+  ['radio', 'katha', 'noorjyoti'].forEach(function (id) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = 'index.html#' + id; a.textContent = t('intent.' + id + '.label');
+    li.appendChild(a);
+    li.appendChild(document.createTextNode(' — ' + t('skill.' + id + '.desc')));
+    brief.appendChild(li);
+  });
+
+  var grid = document.getElementById('skills');
+  J.SKILLS.forEach(function (s) {
+    var a = document.createElement('a');
+    a.className = 'tile'; a.href = s.href;
+    var ic = document.createElement('div'); ic.className = 'ic'; ic.textContent = s.icon;
+    var st = document.createElement('strong'); st.textContent = t('intent.' + s.id + '.label');
+    var sm = document.createElement('small'); sm.textContent = t('skill.' + s.id + '.desc');
+    a.appendChild(ic); a.appendChild(st); a.appendChild(sm);
+    grid.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>

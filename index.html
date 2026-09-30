@@ -40,7 +40,7 @@
   .give{text-align:center}
   footer{border-top:1px solid var(--line);padding:38px 0;color:var(--ink2);font-size:13.5px;text-align:center}
   .note{background:#fff8e6;border:1px solid #f0dda0;border-radius:12px;padding:16px 20px;font-size:14px;color:#6b5518;margin-top:30px}
-  @media(max-width:820px){.progs{grid-template-columns:1fr}h1{font-size:37px}nav a.link{display:none}}
+  @media(max-width:820px){.progs{grid-template-columns:1fr}h1{font-size:37px}nav a.link:not(.jarvis){display:none}}
 </style>
 </head>
 <body>
@@ -50,6 +50,7 @@
     <a class="link" href="#programs">Programs</a>
     <a class="link" href="#mission">Mission</a>
     <a class="link" href="#give">Donate</a>
+    <a class="link jarvis" href="jarvis.html">Jarvis</a>
   </div>
 </nav></div></header>
 
@@ -63,9 +64,9 @@
 <section id="programs"><div class="wrap">
   <div class="section-head"><h2>Our programs</h2><p>Three free, mission-driven programs serving public health, children, and literacy.</p></div>
   <div class="progs">
-    <div class="prog"><div class="ic" style="background:#e4f0f5">📻</div><h3>Universal Health Radio</h3><p>Public-health media and audio broadcasting that translate trustworthy health guidance from WHO, CDC, and FDA into dozens of languages — free to listen, anywhere.</p></div>
-    <div class="prog"><div class="ic" style="background:#fdeede">📚</div><h3>katha.kids</h3><p>Children's stories and educational content that make learning joyful and accessible for kids everywhere, regardless of means.</p></div>
-    <div class="prog"><div class="ic" style="background:#eae3f6">🕯️</div><h3>noorjyoti</h3><p>A reading and literacy program bringing books and the light of learning to readers who need it most.</p></div>
+    <div class="prog" id="radio"><div class="ic" style="background:#e4f0f5">📻</div><h3>Universal Health Radio</h3><p>Public-health media and audio broadcasting that translate trustworthy health guidance from WHO, CDC, and FDA into dozens of languages — free to listen, anywhere.</p></div>
+    <div class="prog" id="katha"><div class="ic" style="background:#fdeede">📚</div><h3>katha.kids</h3><p>Children's stories and educational content that make learning joyful and accessible for kids everywhere, regardless of means.</p></div>
+    <div class="prog" id="noorjyoti"><div class="ic" style="background:#eae3f6">🕯️</div><h3>noorjyoti</h3><p>A reading and literacy program bringing books and the light of learning to readers who need it most.</p></div>
   </div>
 </div></section>
 
