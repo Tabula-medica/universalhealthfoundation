@@ -9,7 +9,7 @@
   'use strict';
 
   // All user-facing Jarvis copy lives here. The site has no i18n framework yet,
-  // so this table is the single place to add translations (en, hi, zh, ta, te, pa, gu, bn, or, ur). Every locale must have
+  // so this table is the single place to add translations (en, hi, mr, zh, ta, te, pa, gu, bn, or, ur). Every locale must have
   // exactly the same keys as STRINGS.en (enforced by tests).
   // Brand names (Universal Health Radio, katha.kids, noorjyoti, Jarvis) stay in Latin script.
   var STRINGS = {
@@ -485,12 +485,60 @@
       'suggest.katha': 'ପିଲାଙ୍କ ଗପ',
       'suggest.noorjyoti': 'ସାକ୍ଷରତା କାର୍ଯ୍ୟକ୍ରମ',
       'suggest.donate': 'ମୁଁ କିପରି ଦାନ କରିବି?'
+    },
+    mr: {
+      'page.title': 'Jarvis — Universal Health Foundation',
+      'page.heading': 'Jarvis',
+      'page.sub': 'आमचे कार्यक्रम, शो आणि मदत करण्याचे मार्ग शोधा. तुम्ही जे शोधत आहात ते लिहा.',
+      'bar.placeholder': 'उदा. "रेडिओ ऐकायचा आहे" किंवा "मी देणगी कशी देऊ?"',
+      'bar.label': 'Jarvis ला विचारा',
+      'bar.submit': 'जा',
+      'suggest.heading': 'करून पाहा',
+      'briefing.heading': 'आज फाउंडेशनमध्ये',
+      'skills.heading': 'या साइटवरील सर्व काही',
+      'result.open': 'उघडा',
+      'privacy': 'Jarvis पूर्णपणे तुमच्या ब्राउझरमध्ये चालतो. तुम्ही जे लिहिता ते फक्त याच पानावरील कीवर्डच्या एका ठरावीक यादीशी जुळवले जाते; ते कुठेही पाठवले, साठवले किंवा लॉग केले जात नाही. Jarvis मध्ये अजून AI चॅट नाही.',
+      'health.disclaimer': 'Universal Health Radio फक्त सर्वसाधारण सार्वजनिक आरोग्य माहिती देतो. हा वैद्यकीय सल्ला नाही. तुमच्या आरोग्याबद्दल कोणत्याही प्रश्नासाठी पात्र डॉक्टर किंवा आरोग्य कर्मचाऱ्याशी बोला; आपत्कालीन परिस्थितीत तुमच्या स्थानिक आपत्कालीन क्रमांकावर कॉल करा.',
+      'licensing': 'Jarvis फक्त फाउंडेशनच्या स्वतःच्या पानांच्या लिंक देतो. तो कार्यक्रमांचा मजकूर कॉपी करत नाही किंवा पुन्हा प्रकाशित करत नाही; तो मजकूर त्याच्या मूळ परवान्यांच्या आणि स्रोतांच्या अधीन राहतो.',
+      'back': '← मुख्य पान',
+      'nav.jarvis': 'Jarvis',
+      'lang.label': 'भाषा',
+
+      'intent.radio.label': 'Universal Health Radio',
+      'intent.radio.reply': 'Universal Health Radio, WHO, CDC आणि FDA यांच्या विश्वासार्ह सार्वजनिक आरोग्य मार्गदर्शनाचा अनेक भाषांमध्ये अनुवाद करतो. हा पाहा कार्यक्रम.',
+      'intent.katha.label': 'katha.kids',
+      'intent.katha.reply': 'katha.kids वर मुलांसाठी गोष्टी आणि शिकण्याची सामग्री आहे. हा पाहा कार्यक्रम.',
+      'intent.noorjyoti.label': 'noorjyoti',
+      'intent.noorjyoti.reply': 'noorjyoti ज्यांना सर्वाधिक गरज आहे अशा वाचकांपर्यंत पुस्तके आणि साक्षरता पोहोचवतो. हा पाहा कार्यक्रम.',
+      'intent.programs.label': 'सर्व कार्यक्रम',
+      'intent.programs.reply': 'हे पाहा फाउंडेशनचे तीनही कार्यक्रम.',
+      'intent.mission.label': 'आमचे ध्येय',
+      'intent.mission.reply': 'फाउंडेशन कोणत्या मूल्यांसाठी काम करते ते जाणून घ्या.',
+      'intent.donate.label': 'देणगी द्या / सहभागी व्हा',
+      'intent.donate.reply': 'धन्यवाद! फाउंडेशनला मदत करण्याचा किंवा त्यात सहभागी होण्याचा मार्ग हा पाहा.',
+      'intent.health.label': 'आरोग्य माहिती',
+      'intent.health.reply': 'मी वैयक्तिक वैद्यकीय प्रश्नांची उत्तरे देऊ शकत नाही. Universal Health Radio, WHO, CDC आणि FDA यांची सर्वसाधारण सार्वजनिक आरोग्य माहिती देतो.',
+      'intent.help.label': 'Jarvis काय करू शकतो?',
+      'intent.help.reply': 'मी तुम्हाला Universal Health Radio, katha.kids, noorjyoti, आमचे ध्येय किंवा देणगी देण्याच्या मार्गापर्यंत नेऊ शकतो. एखादी सूचना करून पाहा.',
+      'intent.unknown.reply': 'माफ करा, मला समजले नाही. "रेडिओ", "मुलांच्या गोष्टी", "साक्षरता", "ध्येय" किंवा "देणगी" लिहून पाहा.',
+
+      'skill.radio.desc': 'अनेक भाषांमध्ये सार्वजनिक आरोग्य ऑडिओ',
+      'skill.katha.desc': 'मुलांसाठी गोष्टी आणि शिक्षण',
+      'skill.noorjyoti.desc': 'पुस्तके आणि साक्षरता',
+      'skill.mission.desc': 'आम्ही हे काम का करतो',
+      'skill.donate.desc': 'मदत करा किंवा स्वयंसेवक व्हा',
+
+      'suggest.radio': 'आरोग्य रेडिओ ऐका',
+      'suggest.katha': 'मुलांच्या गोष्टी',
+      'suggest.noorjyoti': 'साक्षरता कार्यक्रम',
+      'suggest.donate': 'मी देणगी कशी देऊ?'
     }
   };
 
   var LOCALES = [
     { code: 'en', name: 'English', htmlLang: 'en' },
     { code: 'hi', name: 'हिन्दी', htmlLang: 'hi' },
+    { code: 'mr', name: 'मराठी', htmlLang: 'mr' },
     { code: 'zh', name: '中文（简体）', htmlLang: 'zh-Hans' },
     { code: 'ta', name: 'தமிழ்', htmlLang: 'ta' },
     { code: 'te', name: 'తెలుగు', htmlLang: 'te' },
@@ -524,7 +572,7 @@
   // "what medicine should I take" gets the general-information disclaimer.
   var INTENTS = [
     { id: 'help', href: null, keywords: ['help', 'what can you do', 'commands', 'jarvis',
-      'मदद', 'सहायता', '帮助', '你能做什么', 'உதவி', 'సహాయం', 'ਮਦਦ', 'ਸਹਾਇਤਾ', 'મદદ', 'સહાય', 'সাহায্য', 'مدد', 'ସାହାଯ୍ୟ'] },
+      'मदद', 'सहायता', '帮助', '你能做什么', 'உதவி', 'సహాయం', 'ਮਦਦ', 'ਸਹਾਇਤਾ', 'મદદ', 'સહાય', 'সাহায্য', 'مدد', 'ସାହାଯ୍ୟ', 'मदत'] },
     { id: 'health', href: 'index.html#radio', disclaimer: true,
       keywords: ['symptom', 'diagnos', 'medicine', 'medication', 'dose', 'dosage', 'prescription', 'treatment', 'pain', 'fever', 'sick', 'doctor', 'cure', 'vaccine', 'vaccination',
         'दवा', 'दवाई', 'लक्षण', 'बुखार', 'दर्द', 'डॉक्टर', 'इलाज', 'खुराक', 'बीमार', 'टीका', 'टीके', 'नुस्खा',
@@ -535,7 +583,9 @@
         'દવા', 'લક્ષણ', 'તાવ', 'દુખાવ', 'દર્દ', 'ડૉક્ટર', 'ડોક્ટર', 'સારવાર', 'ઇલાજ', 'ડોઝ', 'બીમાર', 'બિમાર', 'રસી',
         'ওষুধ', 'ঔষধ', 'লক্ষণ', 'জ্বর', 'ব্যথা', 'ডাক্তার', 'চিকিৎসা', 'চিকিত্সা', 'ডোজ', 'অসুখ', 'অসুস্থ', 'টিকা',
         'دوا', 'علامت', 'بخار', 'درد', 'ڈاکٹر', 'علاج', 'خوراک', 'بیمار', 'ٹیکہ', 'ٹیکے', 'ویکسین', 'تشخیص', 'نسخہ',
-        'ଔଷଧ', 'ଓଷଧ', 'ଲକ୍ଷଣ', 'ଜ୍ୱର', 'ଜ୍ବର', 'ଯନ୍ତ୍ରଣା', 'ବିନ୍ଧା', 'ଡାକ୍ତର', 'ଚିକିତ୍ସା', 'ଡୋଜ', 'ଅସୁସ୍ଥ', 'ରୋଗ', 'ଟିକା'] },
+        'ଔଷଧ', 'ଓଷଧ', 'ଲକ୍ଷଣ', 'ଜ୍ୱର', 'ଜ୍ବର', 'ଯନ୍ତ୍ରଣା', 'ବିନ୍ଧା', 'ଡାକ୍ତର', 'ଚିକିତ୍ସା', 'ଡୋଜ', 'ଅସୁସ୍ଥ', 'ରୋଗ', 'ଟିକା',
+        // Marathi; "लसी" not "लस" (also starts "लसूण", garlic), "दुखत" not "दुख" (Hindi for sorrow).
+        'औषध', 'ताप', 'दुखत', 'दुखण', 'उपचार', 'डोस', 'आजार', 'लसी'] },
     { id: 'donate', href: 'index.html#give',
       keywords: ['donat', 'give', 'giving', 'support', 'volunteer', 'get involved', 'contribute', 'sponsor', 'contact', 'email',
         'दान', 'सहयोग', 'स्वयंसेव', 'संपर्क', 'जुड़',
@@ -547,7 +597,8 @@
         // "যুক্ত হ" (join) as a phrase, so "যুক্তরাষ্ট্র" (United States) doesn't match.
         'দান', 'অনুদান', 'সহায়তা', 'স্বেচ্ছাসেব', 'যোগাযোগ', 'যুক্ত হ',
         'عطی', 'چندہ', 'رضاکار', 'رابطہ', 'شامل ہو', 'تعاون',
-        'ଦାନ', 'ସହଯୋଗ', 'ସ୍ୱେଚ୍ଛାସେବ', 'ଯୋଗାଯୋଗ', 'ଯୋଗ ଦ'] },
+        'ଦାନ', 'ସହଯୋଗ', 'ସ୍ୱେଚ୍ଛାସେବ', 'ଯୋଗାଯୋଗ', 'ଯୋଗ ଦ',
+        'देणग', 'सहभाग'] },
     { id: 'radio', href: 'index.html#radio',
       keywords: ['radio', 'listen', 'audio', 'podcast', 'broadcast', 'shows', 'episode', 'station', 'health news', 'public health', 'who', 'cdc', 'fda',
         'रेडियो', 'सुन', 'ऑडियो', 'पॉडकास्ट', 'प्रसारण', 'एपिसोड',
@@ -559,7 +610,8 @@
         'রেডিও', 'শুন', 'শোন', 'অডিও', 'পডকাস্ট', 'সম্প্রচার',
         // Not a bare "سن": it starts "سنہ" (year), "سنگ" (stone) and more.
         'ریڈیو', 'سنیں', 'سنن', 'سنو', 'سنائیں', 'آڈیو', 'پوڈکاسٹ', 'نشریات',
-        'ରେଡିଓ', 'ଶୁଣ', 'ଅଡିଓ', 'ପଡକାଷ୍ଟ', 'ପ୍ରସାରଣ'] },
+        'ରେଡିଓ', 'ଶୁଣ', 'ଅଡିଓ', 'ପଡକାଷ୍ଟ', 'ପ୍ରସାରଣ',
+        'रेडिओ', 'ऐक', 'ऑडिओ'] },
     { id: 'katha', href: 'index.html#katha',
       keywords: ['katha', 'kid', 'child', 'story', 'stories', 'bedtime', 'learning for',
         'कथा', 'कहानी', 'कहानि', 'बच्च',
@@ -573,7 +625,9 @@
         // Whole forms of "child", not the stem "بچ", which also starts "بچت" (savings).
         'کتھا', 'کہانی', 'بچے', 'بچوں', 'بچہ',
         // Not Odia "କଥା" either: it means "talk", as in "କଥା ହୁଅନ୍ତୁ".
-        'ଗପ', 'କାହାଣୀ', 'ପିଲା', 'ଶିଶୁ', 'ଛୁଆ'] },
+        'ଗପ', 'କାହାଣୀ', 'ପିଲା', 'ଶିଶୁ', 'ଛୁଆ',
+        // Marathi; "मुले"/"मुलां…", not the stem "मुल", which also starts "मुलाखत" (interview).
+        'गोष्ट', 'मुले', 'मुलां'] },
     { id: 'noorjyoti', href: 'index.html#noorjyoti',
       keywords: ['noor', 'jyoti', 'literacy', 'book', 'read', 'library',
         'नूर', 'ज्योति', 'साक्षरता', 'किताब', 'पुस्तक', 'पढ़',
@@ -584,7 +638,9 @@
         'નૂર', 'જ્યોતિ', 'સાક્ષરતા', 'પુસ્તક', 'ચોપડી', 'વાંચ',
         'নূর', 'জ্যোতি', 'সাক্ষরতা', 'বই', 'পড়', 'গ্রন্থাগার',
         'نور', 'جیوتی', 'جوتی', 'خواندگی', 'کتاب', 'پڑھ', 'لائبریری',
-        'ନୂର', 'ଜ୍ୟୋତି', 'ସାକ୍ଷରତା', 'ବହି', 'ପୁସ୍ତକ', 'ପଢ', 'ପାଠାଗାର'] },
+        'ନୂର', 'ଜ୍ୟୋତି', 'ସାକ୍ଷରତା', 'ବହି', 'ପୁସ୍ତକ', 'ପଢ', 'ପାଠାଗାର',
+        // Marathi; not the stem "वाच", which also starts "वाचवा" (save, rescue).
+        'वाचन', 'वाचाय', 'ग्रंथालय'] },
     { id: 'mission', href: 'index.html#mission',
       keywords: ['mission', 'about', 'who are you', 'why', 'nonprofit', 'foundation', 'values',
         'मिशन', 'उद्देश्य', 'लक्ष्य', 'हमारे बारे', 'फ़ाउंडेशन', 'फाउंडेशन', 'संस्था',
@@ -595,7 +651,8 @@
         'મિશન', 'ઉદ્દેશ', 'હેતુ', 'લક્ષ્ય', 'અમારા વિશે', 'ફાઉન્ડેશન', 'સંસ્થા',
         'লক্ষ্য', 'উদ্দেশ্য', 'মিশন', 'আমাদের সম্পর্কে', 'ফাউন্ডেশন', 'সংস্থা',
         'مشن', 'مقصد', 'ہدف', 'ہمارے بارے', 'فاؤنڈیشن', 'ادارہ', 'غیر منافع',
-        'ଲକ୍ଷ୍ୟ', 'ଉଦ୍ଦେଶ୍ୟ', 'ମିଶନ', 'ଆମ ବିଷୟରେ', 'ଫାଉଣ୍ଡେସନ', 'ସଂସ୍ଥା'] },
+        'ଲକ୍ଷ୍ୟ', 'ଉଦ୍ଦେଶ୍ୟ', 'ମିଶନ', 'ଆମ ବିଷୟରେ', 'ଫାଉଣ୍ଡେସନ', 'ସଂସ୍ଥା',
+        'ध्येय', 'उद्दिष्ट', 'आमच्याबद्दल'] },
     { id: 'programs', href: 'index.html#programs',
       keywords: ['program', 'everything', 'all', 'what do you do', 'services', 'content',
         'कार्यक्रम', 'सभी', 'सब कुछ', 'सेवा',
@@ -606,7 +663,8 @@
         'કાર્યક્રમ', 'બધા', 'બધું', 'સેવા',
         'কর্মসূচি', 'কার্যক্রম', 'সব', 'সমস্ত', 'পরিষেবা', 'সেবা',
         'پروگرام', 'تمام', 'سب کچھ', 'سبھی', 'خدمات',
-        'କାର୍ଯ୍ୟକ୍ରମ', 'ସମସ୍ତ', 'ସବୁ', 'ସେବା'] }
+        'କାର୍ଯ୍ୟକ୍ରମ', 'ସମସ୍ତ', 'ସବୁ', 'ସେବା',
+        'सर्व'] }
   ];
 
   // The skills grid: one tile per existing section of index.html.

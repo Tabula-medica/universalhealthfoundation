@@ -84,7 +84,7 @@ test('every link target exists as an id in index.html', () => {
 
 test('every locale has exactly the same keys as en, all non-empty', () => {
   const en = Object.keys(J.STRINGS.en).sort();
-  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['bn', 'en', 'gu', 'hi', 'or', 'pa', 'ta', 'te', 'ur', 'zh']);
+  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['bn', 'en', 'gu', 'hi', 'mr', 'or', 'pa', 'ta', 'te', 'ur', 'zh']);
   for (const loc of Object.keys(J.STRINGS).filter((l) => l !== 'en')) {
     assert.deepEqual(Object.keys(J.STRINGS[loc]).sort(), en, loc);
     for (const k of en) assert.ok(J.STRINGS[loc][k].trim().length > 0, loc + ' ' + k);
@@ -101,6 +101,36 @@ test('Hindi commands route like their English equivalents', () => {
   assert.equal(route('सभी कार्यक्रम दिखाओ').intent, 'programs');
   assert.equal(route('मैं दान कैसे करूँ?').intent, 'donate');
   assert.equal(route('मदद').intent, 'help');
+});
+
+test('Marathi commands route like their English equivalents', () => {
+  assert.equal(route('आरोग्य रेडिओ ऐका').intent, 'radio');
+  assert.equal(route('मुलांच्या गोष्टी').intent, 'katha');
+  assert.equal(route('साक्षरता कार्यक्रम').intent, 'noorjyoti');
+  assert.equal(route('पुस्तके वाचायची आहेत').intent, 'noorjyoti');
+  assert.equal(route('तुमचे ध्येय काय आहे?').intent, 'mission');
+  assert.equal(route('सर्व कार्यक्रम दाखवा').intent, 'programs');
+  assert.equal(route('मी देणगी कशी देऊ?').intent, 'donate');
+  assert.equal(route('मला सहभागी व्हायचे आहे').intent, 'donate');
+  assert.equal(route('मदत').intent, 'help');
+  // Look-alike stems: लसूण (garlic), वाचवा (save), मुलाखत (interview).
+  assert.equal(route('लसूण खावा का?').intent, 'unknown');
+  assert.equal(route('जीव वाचवा').intent, 'unknown');
+  assert.equal(route('मुलाखत द्यायची आहे').intent, 'unknown');
+});
+
+test('Marathi health questions get the disclaimer in Marathi', () => {
+  const r = J.routeCommand('तापासाठी कोणते औषध घ्यावे?', 'mr');
+  assert.equal(r.intent, 'health');
+  assert.equal(r.disclaimer, J.STRINGS.mr['health.disclaimer']);
+  assert.equal(route('लसीकरण कधी?').intent, 'health');
+  assert.equal(route('डोकं दुखतंय').intent, 'health');
+});
+
+test('Marathi keywords do not change Hindi meanings in the shared Devanagari script', () => {
+  // Hindi "दुख" is sorrow, not pain; "दुखता" (it hurts) is still a health question.
+  assert.equal(route('मुझे दुख है').intent, 'unknown');
+  assert.equal(route('सिर दुखता है').intent, 'health');
 });
 
 test('Chinese commands route like their English equivalents', () => {
@@ -325,6 +355,7 @@ test('resolveLocale picks the first supported language', () => {
   assert.equal(J.resolveLocale(['ur-PK']), 'ur');
   assert.equal(J.resolveLocale(['ur-IN']), 'ur');
   assert.equal(J.resolveLocale(['or-IN']), 'or');
+  assert.equal(J.resolveLocale(['mr-IN']), 'mr');
   assert.equal(J.resolveLocale(['fr']), 'en');
   assert.equal(J.resolveLocale([]), 'en');
 });
