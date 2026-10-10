@@ -15,6 +15,9 @@
   .brand{font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}
   .brand span{color:var(--purple)}
   nav a.link{color:var(--ink2);text-decoration:none;font-size:15px;font-weight:500}
+  .navr{display:flex;align-items:center;gap:16px}
+  .navr a.link{white-space:nowrap}
+  select{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
   h1{font-size:40px;letter-spacing:-1px;margin:48px 0 6px}
   h2{font-size:20px;margin:40px 0 14px}
   .sub{color:var(--ink2);font-size:17px}
@@ -39,13 +42,17 @@
   .brief li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:15px}
   .fine{font-size:13px;color:var(--ink2);margin-top:10px}
   footer{border-top:1px solid var(--line);margin-top:48px;padding:28px 0;color:var(--ink2);font-size:13.5px}
-  @media(max-width:600px){h1{font-size:32px}form{flex-direction:column}}
+  @media(max-width:600px){h1{font-size:32px}form{flex-direction:column}.brand{font-size:16px}.navr{gap:10px}.navr a.link{font-size:14px}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><nav>
   <a class="brand" href="index.html">Universal Health <span>Foundation</span></a>
-  <a class="link" href="index.html" data-i18n="back"></a>
+  <div class="navr">
+    <label for="lang" style="position:absolute;left:-9999px" data-i18n="lang.label"></label>
+    <select id="lang"></select>
+    <a class="link" href="index.html" data-i18n="back"></a>
+  </div>
 </nav></div></header>
 
 <main class="wrap">
@@ -82,21 +89,27 @@
 <script>
 (function () {
   var J = window.JarvisIntents;
-  var locale = (document.documentElement.lang || 'en').slice(0, 2);
+  var locale = 'en';
   var t = function (k) { return J.t(k, locale); };
 
-  document.title = t('page.title');
-  document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) { el.placeholder = t(el.getAttribute('data-i18n-placeholder')); });
+  function stored() { try { return localStorage.getItem('jarvis.lang'); } catch (e) { return null; } }
+  function store(v) { try { localStorage.setItem('jarvis.lang', v); } catch (e) {} }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
   var input = document.getElementById('cmd');
   var result = document.getElementById('result');
   var reply = document.getElementById('reply');
   var disc = document.getElementById('disc');
   var go = document.getElementById('go');
+  var chips = document.getElementById('chips');
+  var brief = document.getElementById('brief');
+  var grid = document.getElementById('skills');
+  var select = document.getElementById('lang');
+  var last = null;
 
   function run(text) {
     var r = J.routeCommand(text, locale);
+    last = text;
     if (!r) return;
     result.hidden = false;
     reply.textContent = r.reply;
@@ -106,37 +119,69 @@
     if (r.href) { go.href = r.href; go.textContent = t('result.open') + ': ' + r.label; }
   }
 
+  function render() {
+    var meta = J.LOCALES.filter(function (l) { return l.code === locale; })[0];
+    document.documentElement.lang = meta.htmlLang;
+    document.title = t('page.title');
+    document.querySelectorAll('[data-i18n]').forEach(function (e) { e.textContent = t(e.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (e) { e.placeholder = t(e.getAttribute('data-i18n-placeholder')); });
+
+    chips.replaceChildren(el('span', null, t('suggest.heading')));
+    J.SUGGESTIONS.forEach(function (s) {
+      var b = el('button', 'chip', t(s.key));
+      b.type = 'button';
+      b.addEventListener('click', function () { input.value = t(s.key); run(s.command); });
+      chips.appendChild(b);
+    });
+
+    // Briefing: built from the programs already published on the home page (no backend exists).
+    brief.replaceChildren();
+    ['radio', 'katha', 'noorjyoti'].forEach(function (id) {
+      var li = el('li');
+      var a = el('a', null, t('intent.' + id + '.label'));
+      a.href = 'index.html#' + id;
+      li.appendChild(a);
+      li.appendChild(document.createTextNode(' — ' + t('skill.' + id + '.desc')));
+      brief.appendChild(li);
+    });
+
+    grid.replaceChildren();
+    J.SKILLS.forEach(function (s) {
+      var a = el('a', 'tile');
+      a.href = s.href;
+      a.appendChild(el('div', 'ic', s.icon));
+      a.appendChild(el('strong', null, t('intent.' + s.id + '.label')));
+      a.appendChild(el('small', null, t('skill.' + s.id + '.desc')));
+      grid.appendChild(a);
+    });
+
+    if (last !== null) run(last);
+  }
+
+  J.LOCALES.forEach(function (l) {
+    var o = el('option', null, l.name);
+    o.value = l.code;
+    o.lang = l.htmlLang;
+    select.appendChild(o);
+  });
+  select.addEventListener('change', function () {
+    locale = select.value;
+    store(locale);
+    try {
+      var url = new URL(location.href);
+      url.searchParams.set('lang', locale);
+      history.replaceState(null, '', url);
+    } catch (e) {}
+    render();
+  });
+
   document.getElementById('bar').addEventListener('submit', function (e) { e.preventDefault(); run(input.value); });
 
-  var chips = document.getElementById('chips');
-  J.SUGGESTIONS.forEach(function (s) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.className = 'chip'; b.textContent = t(s.key);
-    b.addEventListener('click', function () { input.value = t(s.key); run(s.command); });
-    chips.appendChild(b);
-  });
-
-  // Briefing: built from the programs already published on the home page (no backend exists).
-  var brief = document.getElementById('brief');
-  ['radio', 'katha', 'noorjyoti'].forEach(function (id) {
-    var li = document.createElement('li');
-    var a = document.createElement('a');
-    a.href = 'index.html#' + id; a.textContent = t('intent.' + id + '.label');
-    li.appendChild(a);
-    li.appendChild(document.createTextNode(' — ' + t('skill.' + id + '.desc')));
-    brief.appendChild(li);
-  });
-
-  var grid = document.getElementById('skills');
-  J.SKILLS.forEach(function (s) {
-    var a = document.createElement('a');
-    a.className = 'tile'; a.href = s.href;
-    var ic = document.createElement('div'); ic.className = 'ic'; ic.textContent = s.icon;
-    var st = document.createElement('strong'); st.textContent = t('intent.' + s.id + '.label');
-    var sm = document.createElement('small'); sm.textContent = t('skill.' + s.id + '.desc');
-    a.appendChild(ic); a.appendChild(st); a.appendChild(sm);
-    grid.appendChild(a);
-  });
+  // Language: ?lang= link, then the visitor's earlier choice, then the browser's languages.
+  var param = new URLSearchParams(location.search).get('lang');
+  locale = J.resolveLocale([param, stored()].concat(navigator.languages || [navigator.language]));
+  select.value = locale;
+  render();
 })();
 </script>
 </body>

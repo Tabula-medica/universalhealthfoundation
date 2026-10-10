@@ -81,3 +81,77 @@ test('every link target exists as an id in index.html', () => {
     assert.ok(html.includes('id="' + id + '"'), 'missing #' + id + ' in index.html');
   }
 });
+
+test('hi and zh have exactly the same keys as en, all non-empty', () => {
+  const en = Object.keys(J.STRINGS.en).sort();
+  for (const loc of ['hi', 'zh']) {
+    assert.deepEqual(Object.keys(J.STRINGS[loc]).sort(), en, loc);
+    for (const k of en) assert.ok(J.STRINGS[loc][k].trim().length > 0, loc + ' ' + k);
+  }
+  assert.deepEqual(J.LOCALES.map((l) => l.code).sort(), Object.keys(J.STRINGS).sort());
+});
+
+test('Hindi commands route like their English equivalents', () => {
+  assert.equal(route('स्वास्थ्य रेडियो सुनें').intent, 'radio');
+  assert.equal(route('बच्चों की कहानियाँ').intent, 'katha');
+  assert.equal(route('साक्षरता कार्यक्रम').intent, 'noorjyoti');
+  assert.equal(route('किताबें पढ़ना है').intent, 'noorjyoti');
+  assert.equal(route('आपका मिशन क्या है?').intent, 'mission');
+  assert.equal(route('सभी कार्यक्रम दिखाओ').intent, 'programs');
+  assert.equal(route('मैं दान कैसे करूँ?').intent, 'donate');
+  assert.equal(route('मदद').intent, 'help');
+});
+
+test('Chinese commands route like their English equivalents', () => {
+  assert.equal(route('收听健康广播').intent, 'radio');
+  assert.equal(route('给孩子听的故事').intent, 'katha');
+  assert.equal(route('识字项目').intent, 'noorjyoti');
+  assert.equal(route('你们的使命是什么？').intent, 'mission');
+  assert.equal(route('全部项目').intent, 'programs');
+  assert.equal(route('我怎样捐款？').intent, 'donate');
+  assert.equal(route('帮助').intent, 'help');
+});
+
+test('health questions in Hindi and Chinese get the disclaimer in the chosen language', () => {
+  const hi = J.routeCommand('बुखार में कौन सी दवाई लूँ?', 'hi');
+  assert.equal(hi.intent, 'health');
+  assert.equal(hi.disclaimer, J.STRINGS.hi['health.disclaimer']);
+  const zh = J.routeCommand('发烧吃什么药？', 'zh');
+  assert.equal(zh.intent, 'health');
+  assert.equal(zh.disclaimer, J.STRINGS.zh['health.disclaimer']);
+});
+
+test('Hindi keywords match word starts, not the middle of words', () => {
+  // "दान" (donate) must not match inside "प्रदान" (provide).
+  assert.equal(route('प्रदान').intent, 'unknown');
+});
+
+test('replies come back in the requested locale', () => {
+  assert.equal(J.routeCommand('radio', 'hi').reply, J.STRINGS.hi['intent.radio.reply']);
+  assert.equal(J.routeCommand('广播', 'zh').label, 'Universal Health Radio');
+  assert.equal(J.routeCommand('qwerty', 'zh').reply, J.STRINGS.zh['intent.unknown.reply']);
+});
+
+test('every term suggested in the "didn\'t catch that" reply routes somewhere', () => {
+  for (const loc of Object.keys(J.STRINGS)) {
+    const terms = J.STRINGS[loc]['intent.unknown.reply'].match(/["“]([^"”]+)["”]/g);
+    assert.ok(terms && terms.length >= 5, loc);
+    for (const q of terms) assert.notEqual(route(q).intent, 'unknown', loc + ': ' + q);
+  }
+});
+
+test('every suggestion chip label routes to the same intent as its command', () => {
+  for (const loc of Object.keys(J.STRINGS)) {
+    for (const s of J.SUGGESTIONS) {
+      assert.equal(route(J.t(s.key, loc)).intent, route(s.command).intent, loc + ': ' + s.key);
+    }
+  }
+});
+
+test('resolveLocale picks the first supported language', () => {
+  assert.equal(J.resolveLocale(['hi-IN', 'en-US']), 'hi');
+  assert.equal(J.resolveLocale(['fr-FR', 'zh-CN']), 'zh');
+  assert.equal(J.resolveLocale([null, undefined, 'zh-Hans']), 'zh');
+  assert.equal(J.resolveLocale(['fr']), 'en');
+  assert.equal(J.resolveLocale([]), 'en');
+});
