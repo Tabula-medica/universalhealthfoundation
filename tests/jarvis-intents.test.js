@@ -84,7 +84,7 @@ test('every link target exists as an id in index.html', () => {
 
 test('every locale has exactly the same keys as en, all non-empty', () => {
   const en = Object.keys(J.STRINGS.en).sort();
-  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['en', 'hi', 'ta', 'te', 'zh']);
+  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['en', 'hi', 'pa', 'ta', 'te', 'zh']);
   for (const loc of Object.keys(J.STRINGS).filter((l) => l !== 'en')) {
     assert.deepEqual(Object.keys(J.STRINGS[loc]).sort(), en, loc);
     for (const k of en) assert.ok(J.STRINGS[loc][k].trim().length > 0, loc + ' ' + k);
@@ -156,6 +156,27 @@ test('health questions in Tamil and Telugu get the disclaimer in the chosen lang
   assert.equal(route('లక్ష్యం').intent, 'mission');
 });
 
+test('Punjabi (Gurmukhi) commands route like their English equivalents', () => {
+  assert.equal(route('ਸਿਹਤ ਰੇਡੀਓ ਸੁਣੋ').intent, 'radio');
+  assert.equal(route('ਬੱਚਿਆਂ ਦੀਆਂ ਕਹਾਣੀਆਂ').intent, 'katha');
+  assert.equal(route('ਸਾਖਰਤਾ ਪ੍ਰੋਗਰਾਮ').intent, 'noorjyoti');
+  assert.equal(route('ਕਿਤਾਬਾਂ ਪੜ੍ਹਨੀਆਂ ਹਨ').intent, 'noorjyoti');
+  assert.equal(route('ਤੁਹਾਡਾ ਮਿਸ਼ਨ ਕੀ ਹੈ?').intent, 'mission');
+  assert.equal(route('ਸਾਰੇ ਪ੍ਰੋਗਰਾਮ ਦਿਖਾਓ').intent, 'programs');
+  assert.equal(route('ਮੈਂ ਦਾਨ ਕਿਵੇਂ ਕਰਾਂ?').intent, 'donate');
+  assert.equal(route('ਸਵੈ-ਸੇਵਕ ਬਣਨਾ ਹੈ').intent, 'donate');
+  assert.equal(route('ਮਦਦ').intent, 'help');
+});
+
+test('Punjabi health questions get the disclaimer, with or without nukta', () => {
+  // Precomposed "ਖ਼" (U+0A59), decomposed "ਖ" + nukta, and plain "ਖ" are all common spellings.
+  for (const q of ['ਬੁ\u0a59ਾਰ ਲਈ ਕਿਹੜੀ ਦਵਾਈ ਲਵਾਂ?', 'ਬੁ\u0a16\u0a3cਾਰ ਦੀ ਦਵਾਈ', 'ਬੁਖਾਰ']) {
+    const r = J.routeCommand(q, 'pa');
+    assert.equal(r.intent, 'health', q);
+    assert.equal(r.disclaimer, J.STRINGS.pa['health.disclaimer']);
+  }
+});
+
 test('zero-width joiners inside words do not break matching', () => {
   assert.equal(J.normalize('ఫౌండేషన్\u200cలో'), 'ఫౌండేషన్లో');
   assert.equal(route('ఫౌండేషన్\u200cలో').intent, 'mission');
@@ -194,6 +215,11 @@ test('resolveLocale picks the first supported language', () => {
   assert.equal(J.resolveLocale([null, undefined, 'zh-Hans']), 'zh');
   assert.equal(J.resolveLocale(['ta-IN']), 'ta');
   assert.equal(J.resolveLocale(['te_IN', 'en']), 'te');
+  assert.equal(J.resolveLocale(['pa-IN']), 'pa');
+  assert.equal(J.resolveLocale(['pa-Guru-IN']), 'pa');
+  // Our Punjabi is Gurmukhi; Shahmukhi (Perso-Arabic) readers fall through to the next choice.
+  assert.equal(J.resolveLocale(['pa-PK', 'en']), 'en');
+  assert.equal(J.resolveLocale(['pa-Arab', 'hi']), 'hi');
   assert.equal(J.resolveLocale(['fr']), 'en');
   assert.equal(J.resolveLocale([]), 'en');
 });
