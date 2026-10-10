@@ -9,7 +9,7 @@
   'use strict';
 
   // All user-facing Jarvis copy lives here. The site has no i18n framework yet,
-  // so this table is the single place to add translations. Every locale must have
+  // so this table is the single place to add translations (en, hi, zh, ta, te). Every locale must have
   // exactly the same keys as STRINGS.en (enforced by tests).
   // Brand names (Universal Health Radio, katha.kids, noorjyoti, Jarvis) stay in Latin script.
   var STRINGS = {
@@ -154,13 +154,109 @@
       'suggest.katha': '儿童故事',
       'suggest.noorjyoti': '识字项目',
       'suggest.donate': '我怎样捐款？'
+    },
+    ta: {
+      'page.title': 'Jarvis — Universal Health Foundation',
+      'page.heading': 'Jarvis',
+      'page.sub': 'எங்கள் திட்டங்கள், நிகழ்ச்சிகள் மற்றும் உதவும் வழிகளைக் கண்டறியுங்கள். நீங்கள் தேடுவதை எழுதுங்கள்.',
+      'bar.placeholder': 'எ.கா. "வானொலி கேட்க வேண்டும்" அல்லது "நான் எப்படி நன்கொடை அளிப்பது?"',
+      'bar.label': 'Jarvis-இடம் கேளுங்கள்',
+      'bar.submit': 'செல்',
+      'suggest.heading': 'முயற்சிக்கவும்',
+      'briefing.heading': 'இன்று அறக்கட்டளையில்',
+      'skills.heading': 'இந்தத் தளத்தில் உள்ள அனைத்தும்',
+      'result.open': 'திற',
+      'privacy': 'Jarvis முழுவதும் உங்கள் உலாவியிலேயே இயங்குகிறது. நீங்கள் எழுதுவது இந்தப் பக்கத்தில் உள்ள ஒரு நிலையான முக்கியச்சொல் பட்டியலுடன் மட்டுமே ஒப்பிடப்படுகிறது; அது எங்கும் அனுப்பப்படுவதோ, சேமிக்கப்படுவதோ, பதிவு செய்யப்படுவதோ இல்லை. Jarvis-இல் இன்னும் AI உரையாடல் வசதி இல்லை.',
+      'health.disclaimer': 'Universal Health Radio பொதுவான பொதுச் சுகாதாரத் தகவல்களை மட்டுமே பகிர்கிறது. இது மருத்துவ ஆலோசனை அல்ல. உங்கள் தனிப்பட்ட உடல்நலக் கேள்விகளுக்குத் தகுதியான மருத்துவரையோ சுகாதாரப் பணியாளரையோ அணுகுங்கள்; அவசர நிலையில் உங்கள் உள்ளூர் அவசர உதவி எண்ணை அழையுங்கள்.',
+      'licensing': 'Jarvis அறக்கட்டளையின் சொந்தப் பக்கங்களுக்கு மட்டுமே இணைப்புகளைத் தருகிறது. இது திட்ட உள்ளடக்கத்தை நகலெடுப்பதோ மறுபதிப்பு செய்வதோ இல்லை; அந்த உள்ளடக்கம் அதன் மூல உரிமங்களுக்கும் ஆதாரங்களுக்கும் உட்பட்டதாகவே இருக்கும்.',
+      'back': '← முகப்புக்குத் திரும்பு',
+      'nav.jarvis': 'Jarvis',
+      'lang.label': 'மொழி',
+
+      'intent.radio.label': 'Universal Health Radio',
+      'intent.radio.reply': 'Universal Health Radio, WHO, CDC, FDA ஆகியவற்றின் நம்பகமான பொதுச் சுகாதார வழிகாட்டுதல்களைப் பல மொழிகளில் மொழிபெயர்க்கிறது. இதோ அந்தத் திட்டம்.',
+      'intent.katha.label': 'katha.kids',
+      'intent.katha.reply': 'katha.kids-இல் குழந்தைகளுக்கான கதைகளும் கற்றல் உள்ளடக்கமும் உள்ளன. இதோ அந்தத் திட்டம்.',
+      'intent.noorjyoti.label': 'noorjyoti',
+      'intent.noorjyoti.reply': 'noorjyoti மிகவும் தேவைப்படும் வாசகர்களுக்குப் புத்தகங்களையும் எழுத்தறிவையும் கொண்டு சேர்க்கிறது. இதோ அந்தத் திட்டம்.',
+      'intent.programs.label': 'அனைத்துத் திட்டங்கள்',
+      'intent.programs.reply': 'அறக்கட்டளையின் மூன்று திட்டங்களும் இதோ.',
+      'intent.mission.label': 'எங்கள் நோக்கம்',
+      'intent.mission.reply': 'அறக்கட்டளை எதற்காகச் செயல்படுகிறது என்பது இதோ.',
+      'intent.donate.label': 'நன்கொடை / இணைந்திடுங்கள்',
+      'intent.donate.reply': 'நன்றி! அறக்கட்டளைக்கு ஆதரவளிக்கவோ அதில் இணையவோ வழி இதோ.',
+      'intent.health.label': 'சுகாதாரத் தகவல்',
+      'intent.health.reply': 'தனிப்பட்ட மருத்துவக் கேள்விகளுக்கு என்னால் பதிலளிக்க முடியாது. Universal Health Radio, WHO, CDC, FDA வழங்கும் பொதுவான பொதுச் சுகாதாரத் தகவல்களைப் பகிர்கிறது.',
+      'intent.help.label': 'Jarvis என்ன செய்யும்?',
+      'intent.help.reply': 'நான் உங்களை Universal Health Radio, katha.kids, noorjyoti, எங்கள் நோக்கம் அல்லது நன்கொடை அளிக்கும் வழிக்கு அழைத்துச் செல்ல முடியும். ஒரு பரிந்துரையை முயற்சிக்கவும்.',
+      'intent.unknown.reply': 'மன்னிக்கவும், எனக்குப் புரியவில்லை. "வானொலி", "குழந்தைகள் கதைகள்", "எழுத்தறிவு", "நோக்கம்" அல்லது "நன்கொடை" என்று எழுதிப் பாருங்கள்.',
+
+      'skill.radio.desc': 'பல மொழிகளில் பொதுச் சுகாதார ஒலி நிகழ்ச்சிகள்',
+      'skill.katha.desc': 'குழந்தைகளுக்கான கதைகளும் கற்றலும்',
+      'skill.noorjyoti.desc': 'புத்தகங்களும் எழுத்தறிவும்',
+      'skill.mission.desc': 'நாங்கள் ஏன் இந்தப் பணியைச் செய்கிறோம்',
+      'skill.donate.desc': 'ஆதரவளியுங்கள் அல்லது தன்னார்வலராகுங்கள்',
+
+      'suggest.radio': 'சுகாதார வானொலி கேளுங்கள்',
+      'suggest.katha': 'குழந்தைகள் கதைகள்',
+      'suggest.noorjyoti': 'எழுத்தறிவுத் திட்டம்',
+      'suggest.donate': 'நான் எப்படி நன்கொடை அளிப்பது?'
+    },
+    te: {
+      'page.title': 'Jarvis — Universal Health Foundation',
+      'page.heading': 'Jarvis',
+      'page.sub': 'మా కార్యక్రమాలు, షోలు, సహాయం చేసే మార్గాలను కనుగొనండి. మీరు వెతుకుతున్నది టైప్ చేయండి.',
+      'bar.placeholder': 'ఉదా. "రేడియో వినాలి" లేదా "నేను ఎలా విరాళం ఇవ్వాలి?"',
+      'bar.label': 'Jarvisను అడగండి',
+      'bar.submit': 'వెళ్ళండి',
+      'suggest.heading': 'ప్రయత్నించండి',
+      'briefing.heading': 'ఈరోజు ఫౌండేషన్‌లో',
+      'skills.heading': 'ఈ సైట్‌లో ఉన్నవన్నీ',
+      'result.open': 'తెరవండి',
+      'privacy': 'Jarvis పూర్తిగా మీ బ్రౌజర్‌లోనే పనిచేస్తుంది. మీరు టైప్ చేసేది ఈ పేజీలోని ఒక స్థిరమైన కీవర్డ్‌ల జాబితాతో మాత్రమే పోల్చబడుతుంది; అది ఎక్కడికీ పంపబడదు, నిల్వ చేయబడదు లేదా లాగ్ చేయబడదు. Jarvisలో ఇంకా AI చాట్ సదుపాయం లేదు.',
+      'health.disclaimer': 'Universal Health Radio సాధారణ ప్రజారోగ్య సమాచారాన్ని మాత్రమే అందిస్తుంది. ఇది వైద్య సలహా కాదు. మీ వ్యక్తిగత ఆరోగ్య ప్రశ్నల కోసం అర్హత కలిగిన వైద్యుడిని లేదా ఆరోగ్య కార్యకర్తను సంప్రదించండి; అత్యవసర పరిస్థితిలో మీ స్థానిక అత్యవసర నంబర్‌కు కాల్ చేయండి.',
+      'licensing': 'Jarvis ఫౌండేషన్ సొంత పేజీలకు మాత్రమే లింక్‌లు ఇస్తుంది. ఇది కార్యక్రమాల కంటెంట్‌ను కాపీ చేయదు లేదా తిరిగి ప్రచురించదు; ఆ కంటెంట్ దాని అసలు లైసెన్సులు మరియు మూలాలకు లోబడి ఉంటుంది.',
+      'back': '← హోమ్‌కు తిరిగి',
+      'nav.jarvis': 'Jarvis',
+      'lang.label': 'భాష',
+
+      'intent.radio.label': 'Universal Health Radio',
+      'intent.radio.reply': 'Universal Health Radio, WHO, CDC మరియు FDA యొక్క విశ్వసనీయ ప్రజారోగ్య మార్గదర్శకాలను అనేక భాషల్లోకి అనువదిస్తుంది. ఇదిగో ఆ కార్యక్రమం.',
+      'intent.katha.label': 'katha.kids',
+      'intent.katha.reply': 'katha.kidsలో పిల్లల కథలు మరియు నేర్చుకునే కంటెంట్ ఉన్నాయి. ఇదిగో ఆ కార్యక్రమం.',
+      'intent.noorjyoti.label': 'noorjyoti',
+      'intent.noorjyoti.reply': 'noorjyoti అత్యంత అవసరమైన పాఠకులకు పుస్తకాలను మరియు అక్షరాస్యతను అందిస్తుంది. ఇదిగో ఆ కార్యక్రమం.',
+      'intent.programs.label': 'అన్ని కార్యక్రమాలు',
+      'intent.programs.reply': 'ఫౌండేషన్ యొక్క మూడు కార్యక్రమాలు ఇవిగో.',
+      'intent.mission.label': 'మా లక్ష్యం',
+      'intent.mission.reply': 'ఫౌండేషన్ దేని కోసం పనిచేస్తుందో ఇక్కడ చూడండి.',
+      'intent.donate.label': 'విరాళం / పాల్గొనండి',
+      'intent.donate.reply': 'ధన్యవాదాలు! ఫౌండేషన్‌కు మద్దతు ఇవ్వడానికి లేదా అందులో పాల్గొనడానికి మార్గం ఇదిగో.',
+      'intent.health.label': 'ఆరోగ్య సమాచారం',
+      'intent.health.reply': 'వ్యక్తిగత వైద్య ప్రశ్నలకు నేను సమాధానం ఇవ్వలేను. Universal Health Radio, WHO, CDC మరియు FDA నుండి సాధారణ ప్రజారోగ్య సమాచారాన్ని అందిస్తుంది.',
+      'intent.help.label': 'Jarvis ఏమి చేయగలదు?',
+      'intent.help.reply': 'నేను మిమ్మల్ని Universal Health Radio, katha.kids, noorjyoti, మా లక్ష్యం లేదా విరాళం ఇచ్చే మార్గానికి తీసుకెళ్లగలను. ఒక సూచనను ప్రయత్నించండి.',
+      'intent.unknown.reply': 'క్షమించండి, నాకు అర్థం కాలేదు. "రేడియో", "పిల్లల కథలు", "అక్షరాస్యత", "లక్ష్యం" లేదా "విరాళం" అని టైప్ చేసి చూడండి.',
+
+      'skill.radio.desc': 'అనేక భాషల్లో ప్రజారోగ్య ఆడియో',
+      'skill.katha.desc': 'పిల్లల కోసం కథలు, నేర్చుకోవడం',
+      'skill.noorjyoti.desc': 'పుస్తకాలు, అక్షరాస్యత',
+      'skill.mission.desc': 'మేము ఈ పని ఎందుకు చేస్తున్నాం',
+      'skill.donate.desc': 'మద్దతు ఇవ్వండి లేదా స్వచ్ఛందంగా పనిచేయండి',
+
+      'suggest.radio': 'ఆరోగ్య రేడియో వినండి',
+      'suggest.katha': 'పిల్లల కథలు',
+      'suggest.noorjyoti': 'అక్షరాస్యత కార్యక్రమం',
+      'suggest.donate': 'నేను ఎలా విరాళం ఇవ్వాలి?'
     }
   };
 
   var LOCALES = [
     { code: 'en', name: 'English', htmlLang: 'en' },
     { code: 'hi', name: 'हिन्दी', htmlLang: 'hi' },
-    { code: 'zh', name: '中文（简体）', htmlLang: 'zh-Hans' }
+    { code: 'zh', name: '中文（简体）', htmlLang: 'zh-Hans' },
+    { code: 'ta', name: 'தமிழ்', htmlLang: 'ta' },
+    { code: 'te', name: 'తెలుగు', htmlLang: 'te' }
   ];
 
   // Picks the first supported locale from a list of BCP 47 tags (e.g. a ?lang= value,
@@ -183,35 +279,49 @@
   // "what medicine should I take" gets the general-information disclaimer.
   var INTENTS = [
     { id: 'help', href: null, keywords: ['help', 'what can you do', 'commands', 'jarvis',
-      'मदद', 'सहायता', '帮助', '你能做什么'] },
+      'मदद', 'सहायता', '帮助', '你能做什么', 'உதவி', 'సహాయం'] },
     { id: 'health', href: 'index.html#radio', disclaimer: true,
       keywords: ['symptom', 'diagnos', 'medicine', 'medication', 'dose', 'dosage', 'prescription', 'treatment', 'pain', 'fever', 'sick', 'doctor', 'cure', 'vaccine', 'vaccination',
         'दवा', 'दवाई', 'लक्षण', 'बुखार', 'दर्द', 'डॉक्टर', 'इलाज', 'खुराक', 'बीमार', 'टीका', 'टीके', 'नुस्खा',
-        '药', '症状', '发烧', '发热', '疼', '痛', '医生', '治疗', '剂量', '生病', '疫苗', '诊断', '处方'] },
+        '药', '症状', '发烧', '发热', '疼', '痛', '医生', '治疗', '剂量', '生病', '疫苗', '诊断', '处方',
+        'மருந்து', 'அறிகுறி', 'காய்ச்சல்', 'வலி', 'மருத்துவர்', 'டாக்டர்', 'சிகிச்சை', 'நோய்', 'தடுப்பூசி',
+        'మందు', 'లక్షణ', 'జ్వర', 'నొప్పి', 'డాక్టర్', 'వైద్యుడ', 'చికిత్స', 'మోతాదు', 'అనారోగ్య', 'టీకా', 'వ్యాక్సిన్'] },
     { id: 'donate', href: 'index.html#give',
       keywords: ['donat', 'give', 'giving', 'support', 'volunteer', 'get involved', 'contribute', 'sponsor', 'contact', 'email',
         'दान', 'सहयोग', 'स्वयंसेव', 'संपर्क', 'जुड़',
-        '捐', '支持', '志愿', '联系', '参与'] },
+        '捐', '支持', '志愿', '联系', '参与',
+        'நன்கொடை', 'ஆதரவ', 'தன்னார்வ', 'தொடர்பு', 'இணைந்',
+        'విరాళ', 'మద్దతు', 'స్వచ్ఛంద', 'సంప్రదించ', 'పాల్గొన'] },
     { id: 'radio', href: 'index.html#radio',
       keywords: ['radio', 'listen', 'audio', 'podcast', 'broadcast', 'shows', 'episode', 'station', 'health news', 'public health', 'who', 'cdc', 'fda',
         'रेडियो', 'सुन', 'ऑडियो', 'पॉडकास्ट', 'प्रसारण', 'एपिसोड',
-        '广播', '电台', '收听', '音频', '播客', '节目'] },
+        '广播', '电台', '收听', '音频', '播客', '节目',
+        'வானொலி', 'ரேடியோ', 'கேட்க', 'கேளுங்கள்', 'ஆடியோ', 'பாட்காஸ்ட்', 'ஒலிபரப்பு',
+        'రేడియో', 'వినండి', 'వినాలి', 'వినడ', 'ఆడియో', 'పాడ్‌కాస్ట్', 'ప్రసార'] },
     { id: 'katha', href: 'index.html#katha',
       keywords: ['katha', 'kid', 'child', 'story', 'stories', 'bedtime', 'learning for',
         'कथा', 'कहानी', 'कहानि', 'बच्च',
-        '故事', '儿童', '孩子', '小孩', '童话'] },
+        '故事', '儿童', '孩子', '小孩', '童话',
+        'கதை', 'குழந்தை', 'சிறுவர்', 'பிள்ளை',
+        'కథ', 'పిల్ల', 'చిన్నార'] },
     { id: 'noorjyoti', href: 'index.html#noorjyoti',
       keywords: ['noor', 'jyoti', 'literacy', 'book', 'read', 'library',
         'नूर', 'ज्योति', 'साक्षरता', 'किताब', 'पुस्तक', 'पढ़',
-        '识字', '读书', '阅读', '图书', '书'] },
+        '识字', '读书', '阅读', '图书', '书',
+        'நூர்', 'ஜோதி', 'எழுத்தறிவு', 'புத்தக', 'நூல்', 'படிக்க', 'வாசி',
+        'నూర్', 'జ్యోతి', 'అక్షరాస్యత', 'పుస్తక', 'చదువు', 'చదవ', 'గ్రంథాలయ'] },
     { id: 'mission', href: 'index.html#mission',
       keywords: ['mission', 'about', 'who are you', 'why', 'nonprofit', 'foundation', 'values',
         'मिशन', 'उद्देश्य', 'लक्ष्य', 'हमारे बारे', 'फ़ाउंडेशन', 'फाउंडेशन', 'संस्था',
-        '使命', '宗旨', '关于', '基金会', '非营利'] },
+        '使命', '宗旨', '关于', '基金会', '非营利',
+        'நோக்கம்', 'குறிக்கோள்', 'எங்களைப் பற்றி', 'அறக்கட்டளை',
+        'లక్ష్య', 'ఉద్దేశ', 'మా గురించి', 'ఫౌండేషన్', 'లాభాపేక్ష'] },
     { id: 'programs', href: 'index.html#programs',
       keywords: ['program', 'everything', 'all', 'what do you do', 'services', 'content',
         'कार्यक्रम', 'सभी', 'सब कुछ', 'सेवा',
-        '项目', '所有', '全部', '服务'] }
+        '项目', '所有', '全部', '服务',
+        'திட்ட', 'அனைத்து', 'எல்லா', 'சேவை',
+        'కార్యక్రమ', 'అన్ని', 'అన్నీ', 'సేవ'] }
   ];
 
   // The skills grid: one tile per existing section of index.html.
@@ -230,11 +340,13 @@
     { key: 'suggest.donate', command: 'donate' }
   ];
 
-  // Keeps letters, combining marks (Devanagari matras) and digits in any script;
+  // Keeps letters, combining marks (Indic vowel signs) and digits in any script and drops
+  // zero-width (non-)joiners, which Telugu and Tamil keyboards insert inside words;
   // NFC makes precomposed and decomposed forms (e.g. "ड़") compare equal.
   function normalize(text) {
     return String(text == null ? '' : text)
       .normalize('NFC')
+      .replace(/[\u200c\u200d]/g, '')
       .toLowerCase()
       .replace(/[^\p{L}\p{M}\p{N}\s]/gu, ' ')
       .replace(/\s+/g, ' ')

@@ -82,9 +82,10 @@ test('every link target exists as an id in index.html', () => {
   }
 });
 
-test('hi and zh have exactly the same keys as en, all non-empty', () => {
+test('every locale has exactly the same keys as en, all non-empty', () => {
   const en = Object.keys(J.STRINGS.en).sort();
-  for (const loc of ['hi', 'zh']) {
+  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['en', 'hi', 'ta', 'te', 'zh']);
+  for (const loc of Object.keys(J.STRINGS).filter((l) => l !== 'en')) {
     assert.deepEqual(Object.keys(J.STRINGS[loc]).sort(), en, loc);
     for (const k of en) assert.ok(J.STRINGS[loc][k].trim().length > 0, loc + ' ' + k);
   }
@@ -121,6 +122,45 @@ test('health questions in Hindi and Chinese get the disclaimer in the chosen lan
   assert.equal(zh.disclaimer, J.STRINGS.zh['health.disclaimer']);
 });
 
+test('Tamil commands route like their English equivalents', () => {
+  assert.equal(route('சுகாதார வானொலி கேளுங்கள்').intent, 'radio');
+  assert.equal(route('குழந்தைகள் கதைகள்').intent, 'katha');
+  assert.equal(route('எழுத்தறிவுத் திட்டம்').intent, 'noorjyoti');
+  assert.equal(route('உங்கள் நோக்கம் என்ன?').intent, 'mission');
+  assert.equal(route('அனைத்துத் திட்டங்கள்').intent, 'programs');
+  assert.equal(route('நான் எப்படி நன்கொடை அளிப்பது?').intent, 'donate');
+  assert.equal(route('உதவி').intent, 'help');
+  // "கேள்வி" (question) must not be read as "கேள்" (listen) -> radio.
+  assert.equal(route('எனக்கு ஒரு கேள்வி').intent, 'unknown');
+});
+
+test('Telugu commands route like their English equivalents', () => {
+  assert.equal(route('ఆరోగ్య రేడియో వినండి').intent, 'radio');
+  assert.equal(route('పిల్లల కథలు').intent, 'katha');
+  assert.equal(route('అక్షరాస్యత కార్యక్రమం').intent, 'noorjyoti');
+  assert.equal(route('మీ లక్ష్యం ఏమిటి?').intent, 'mission');
+  assert.equal(route('అన్ని కార్యక్రమాలు').intent, 'programs');
+  assert.equal(route('నేను ఎలా విరాళం ఇవ్వాలి?').intent, 'donate');
+  assert.equal(route('సహాయం').intent, 'help');
+});
+
+test('health questions in Tamil and Telugu get the disclaimer in the chosen language', () => {
+  const ta = J.routeCommand('காய்ச்சலுக்கு என்ன மருந்து?', 'ta');
+  assert.equal(ta.intent, 'health');
+  assert.equal(ta.disclaimer, J.STRINGS.ta['health.disclaimer']);
+  const te = J.routeCommand('జ్వరానికి ఏ మందు వేసుకోవాలి?', 'te');
+  assert.equal(te.intent, 'health');
+  assert.equal(te.disclaimer, J.STRINGS.te['health.disclaimer']);
+  // Telugu "లక్షణ" (symptom) and "లక్ష్యం" (goal) share a prefix but must not collide.
+  assert.equal(route('లక్షణాలు').intent, 'health');
+  assert.equal(route('లక్ష్యం').intent, 'mission');
+});
+
+test('zero-width joiners inside words do not break matching', () => {
+  assert.equal(J.normalize('ఫౌండేషన్\u200cలో'), 'ఫౌండేషన్లో');
+  assert.equal(route('ఫౌండేషన్\u200cలో').intent, 'mission');
+});
+
 test('Hindi keywords match word starts, not the middle of words', () => {
   // "दान" (donate) must not match inside "प्रदान" (provide).
   assert.equal(route('प्रदान').intent, 'unknown');
@@ -152,6 +192,8 @@ test('resolveLocale picks the first supported language', () => {
   assert.equal(J.resolveLocale(['hi-IN', 'en-US']), 'hi');
   assert.equal(J.resolveLocale(['fr-FR', 'zh-CN']), 'zh');
   assert.equal(J.resolveLocale([null, undefined, 'zh-Hans']), 'zh');
+  assert.equal(J.resolveLocale(['ta-IN']), 'ta');
+  assert.equal(J.resolveLocale(['te_IN', 'en']), 'te');
   assert.equal(J.resolveLocale(['fr']), 'en');
   assert.equal(J.resolveLocale([]), 'en');
 });
