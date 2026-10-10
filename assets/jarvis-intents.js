@@ -9,7 +9,7 @@
   'use strict';
 
   // All user-facing Jarvis copy lives here. The site has no i18n framework yet,
-  // so this table is the single place to add translations (en, hi, zh, ta, te, pa, gu, bn). Every locale must have
+  // so this table is the single place to add translations (en, hi, zh, ta, te, pa, gu, bn, ur). Every locale must have
   // exactly the same keys as STRINGS.en (enforced by tests).
   // Brand names (Universal Health Radio, katha.kids, noorjyoti, Jarvis) stay in Latin script.
   var STRINGS = {
@@ -390,6 +390,54 @@
       'suggest.katha': 'শিশুদের গল্প',
       'suggest.noorjyoti': 'সাক্ষরতা কর্মসূচি',
       'suggest.donate': 'আমি কীভাবে দান করব?'
+    },
+    // Urdu (right-to-left; LOCALES marks it dir: 'rtl').
+    ur: {
+      'page.title': 'Jarvis — Universal Health Foundation',
+      'page.heading': 'Jarvis',
+      'page.sub': 'ہمارے پروگرام، شوز اور مدد کرنے کے طریقے تلاش کریں۔ آپ جو ڈھونڈ رہے ہیں وہ لکھیں۔',
+      'bar.placeholder': 'مثلاً "ریڈیو سننا ہے" یا "میں عطیہ کیسے دوں؟"',
+      'bar.label': 'Jarvis سے پوچھیں',
+      'bar.submit': 'جائیں',
+      'suggest.heading': 'آزمائیں',
+      'briefing.heading': 'آج فاؤنڈیشن میں',
+      'skills.heading': 'اس سائٹ پر سب کچھ',
+      'result.open': 'کھولیں',
+      'privacy': 'Jarvis مکمل طور پر آپ کے براؤزر میں چلتا ہے۔ آپ جو لکھتے ہیں اسے صرف اسی صفحے پر موجود کلیدی الفاظ کی ایک مقررہ فہرست سے ملایا جاتا ہے؛ اسے کہیں بھیجا، محفوظ یا لاگ نہیں کیا جاتا۔ Jarvis میں ابھی AI چیٹ نہیں ہے۔',
+      'health.disclaimer': 'Universal Health Radio صرف عام صحتِ عامہ کی معلومات فراہم کرتا ہے۔ یہ طبی مشورہ نہیں ہے۔ اپنی صحت سے متعلق کسی سوال کے لیے کسی مستند ڈاکٹر یا صحت کارکن سے بات کریں؛ ہنگامی صورت میں اپنے مقامی ایمرجنسی نمبر پر کال کریں۔',
+      'licensing': 'Jarvis صرف فاؤنڈیشن کے اپنے صفحات کے لنک دیتا ہے۔ یہ پروگراموں کا مواد نقل یا دوبارہ شائع نہیں کرتا؛ وہ مواد اپنے اصل لائسنسوں اور ذرائع کے تابع رہتا ہے۔',
+      'back': '→ مرکزی صفحہ',
+      'nav.jarvis': 'Jarvis',
+      'lang.label': 'زبان',
+
+      'intent.radio.label': 'Universal Health Radio',
+      'intent.radio.reply': 'Universal Health Radio، WHO، CDC اور FDA کی قابلِ اعتماد صحتِ عامہ کی رہنمائی کا کئی زبانوں میں ترجمہ کرتا ہے۔ یہ رہا پروگرام۔',
+      'intent.katha.label': 'katha.kids',
+      'intent.katha.reply': 'katha.kids پر بچوں کے لیے کہانیاں اور سیکھنے کا مواد ہے۔ یہ رہا پروگرام۔',
+      'intent.noorjyoti.label': 'noorjyoti',
+      'intent.noorjyoti.reply': 'noorjyoti اُن قارئین تک کتابیں اور خواندگی پہنچاتا ہے جنہیں ان کی سب سے زیادہ ضرورت ہے۔ یہ رہا پروگرام۔',
+      'intent.programs.label': 'تمام پروگرام',
+      'intent.programs.reply': 'یہ رہے فاؤنڈیشن کے تینوں پروگرام۔',
+      'intent.mission.label': 'ہمارا مشن',
+      'intent.mission.reply': 'جانیے کہ فاؤنڈیشن کن اقدار کے لیے کام کرتی ہے۔',
+      'intent.donate.label': 'عطیہ دیں / شامل ہوں',
+      'intent.donate.reply': 'شکریہ! فاؤنڈیشن کی مدد کرنے یا اس میں شامل ہونے کا طریقہ یہ رہا۔',
+      'intent.health.label': 'صحت کی معلومات',
+      'intent.health.reply': 'میں ذاتی طبی سوالات کے جواب نہیں دے سکتا۔ Universal Health Radio، WHO، CDC اور FDA کی عام صحتِ عامہ کی معلومات فراہم کرتا ہے۔',
+      'intent.help.label': 'Jarvis کیا کر سکتا ہے؟',
+      'intent.help.reply': 'میں آپ کو Universal Health Radio، katha.kids، noorjyoti، ہمارے مشن یا عطیہ دینے کے طریقے تک لے جا سکتا ہوں۔ کوئی تجویز آزمائیں۔',
+      'intent.unknown.reply': 'معاف کیجیے، میں سمجھ نہیں پایا۔ "ریڈیو"، "بچوں کی کہانیاں"، "خواندگی"، "مشن" یا "عطیہ" لکھ کر دیکھیں۔',
+
+      'skill.radio.desc': 'کئی زبانوں میں صحتِ عامہ کا آڈیو',
+      'skill.katha.desc': 'بچوں کے لیے کہانیاں اور تعلیم',
+      'skill.noorjyoti.desc': 'کتابیں اور خواندگی',
+      'skill.mission.desc': 'ہم یہ کام کیوں کرتے ہیں',
+      'skill.donate.desc': 'تعاون کریں یا رضاکار بنیں',
+
+      'suggest.radio': 'صحت ریڈیو سنیں',
+      'suggest.katha': 'بچوں کی کہانیاں',
+      'suggest.noorjyoti': 'خواندگی پروگرام',
+      'suggest.donate': 'میں عطیہ کیسے دوں؟'
     }
   };
 
@@ -401,7 +449,8 @@
     { code: 'te', name: 'తెలుగు', htmlLang: 'te' },
     { code: 'pa', name: 'ਪੰਜਾਬੀ', htmlLang: 'pa' },
     { code: 'gu', name: 'ગુજરાતી', htmlLang: 'gu' },
-    { code: 'bn', name: 'বাংলা', htmlLang: 'bn' }
+    { code: 'bn', name: 'বাংলা', htmlLang: 'bn' },
+    { code: 'ur', name: 'اردو', htmlLang: 'ur', dir: 'rtl' }
   ];
 
   // Picks the first supported locale from a list of BCP 47 tags (e.g. a ?lang= value,
@@ -427,7 +476,7 @@
   // "what medicine should I take" gets the general-information disclaimer.
   var INTENTS = [
     { id: 'help', href: null, keywords: ['help', 'what can you do', 'commands', 'jarvis',
-      'मदद', 'सहायता', '帮助', '你能做什么', 'உதவி', 'సహాయం', 'ਮਦਦ', 'ਸਹਾਇਤਾ', 'મદદ', 'સહાય', 'সাহায্য'] },
+      'मदद', 'सहायता', '帮助', '你能做什么', 'உதவி', 'సహాయం', 'ਮਦਦ', 'ਸਹਾਇਤਾ', 'મદદ', 'સહાય', 'সাহায্য', 'مدد'] },
     { id: 'health', href: 'index.html#radio', disclaimer: true,
       keywords: ['symptom', 'diagnos', 'medicine', 'medication', 'dose', 'dosage', 'prescription', 'treatment', 'pain', 'fever', 'sick', 'doctor', 'cure', 'vaccine', 'vaccination',
         'दवा', 'दवाई', 'लक्षण', 'बुखार', 'दर्द', 'डॉक्टर', 'इलाज', 'खुराक', 'बीमार', 'टीका', 'टीके', 'नुस्खा',
@@ -436,7 +485,8 @@
         'మందు', 'లక్షణ', 'జ్వర', 'నొప్పి', 'డాక్టర్', 'వైద్యుడ', 'చికిత్స', 'మోతాదు', 'అనారోగ్య', 'టీకా', 'వ్యాక్సిన్',
         'ਦਵਾ', 'ਲੱਛਣ', 'ਬੁਖ਼ਾਰ', 'ਬੁਖਾਰ', 'ਦਰਦ', 'ਡਾਕਟਰ', 'ਇਲਾਜ', 'ਖ਼ੁਰਾਕ', 'ਖੁਰਾਕ', 'ਬਿਮਾਰ', 'ਬੀਮਾਰ', 'ਟੀਕ',
         'દવા', 'લક્ષણ', 'તાવ', 'દુખાવ', 'દર્દ', 'ડૉક્ટર', 'ડોક્ટર', 'સારવાર', 'ઇલાજ', 'ડોઝ', 'બીમાર', 'બિમાર', 'રસી',
-        'ওষুধ', 'ঔষধ', 'লক্ষণ', 'জ্বর', 'ব্যথা', 'ডাক্তার', 'চিকিৎসা', 'চিকিত্সা', 'ডোজ', 'অসুখ', 'অসুস্থ', 'টিকা'] },
+        'ওষুধ', 'ঔষধ', 'লক্ষণ', 'জ্বর', 'ব্যথা', 'ডাক্তার', 'চিকিৎসা', 'চিকিত্সা', 'ডোজ', 'অসুখ', 'অসুস্থ', 'টিকা',
+        'دوا', 'علامت', 'بخار', 'درد', 'ڈاکٹر', 'علاج', 'خوراک', 'بیمار', 'ٹیکہ', 'ٹیکے', 'ویکسین', 'تشخیص', 'نسخہ'] },
     { id: 'donate', href: 'index.html#give',
       keywords: ['donat', 'give', 'giving', 'support', 'volunteer', 'get involved', 'contribute', 'sponsor', 'contact', 'email',
         'दान', 'सहयोग', 'स्वयंसेव', 'संपर्क', 'जुड़',
@@ -446,7 +496,8 @@
         'ਦਾਨ', 'ਸਹਿਯੋਗ', 'ਸਵੈ ਸੇਵ', 'ਸੰਪਰਕ', 'ਜੁੜ',
         'દાન', 'સહયોગ', 'સ્વયંસેવ', 'સંપર્ક', 'જોડા',
         // "যুক্ত হ" (join) as a phrase, so "যুক্তরাষ্ট্র" (United States) doesn't match.
-        'দান', 'অনুদান', 'সহায়তা', 'স্বেচ্ছাসেব', 'যোগাযোগ', 'যুক্ত হ'] },
+        'দান', 'অনুদান', 'সহায়তা', 'স্বেচ্ছাসেব', 'যোগাযোগ', 'যুক্ত হ',
+        'عطی', 'چندہ', 'رضاکار', 'رابطہ', 'شامل ہو', 'تعاون'] },
     { id: 'radio', href: 'index.html#radio',
       keywords: ['radio', 'listen', 'audio', 'podcast', 'broadcast', 'shows', 'episode', 'station', 'health news', 'public health', 'who', 'cdc', 'fda',
         'रेडियो', 'सुन', 'ऑडियो', 'पॉडकास्ट', 'प्रसारण', 'एपिसोड',
@@ -455,7 +506,9 @@
         'రేడియో', 'వినండి', 'వినాలి', 'వినడ', 'ఆడియో', 'పాడ్‌కాస్ట్', 'ప్రసార',
         'ਰੇਡੀਓ', 'ਰੇਡੀਉ', 'ਸੁਣ', 'ਆਡੀਓ', 'ਪੌਡਕਾਸਟ', 'ਪ੍ਰਸਾਰਣ', 'ਐਪੀਸੋਡ',
         'રેડિયો', 'સાંભળ', 'ઑડિયો', 'ઓડિયો', 'પોડકાસ્ટ', 'પ્રસારણ', 'એપિસોડ',
-        'রেডিও', 'শুন', 'শোন', 'অডিও', 'পডকাস্ট', 'সম্প্রচার'] },
+        'রেডিও', 'শুন', 'শোন', 'অডিও', 'পডকাস্ট', 'সম্প্রচার',
+        // Not a bare "سن": it starts "سنہ" (year), "سنگ" (stone) and more.
+        'ریڈیو', 'سنیں', 'سنن', 'سنو', 'سنائیں', 'آڈیو', 'پوڈکاسٹ', 'نشریات'] },
     { id: 'katha', href: 'index.html#katha',
       keywords: ['katha', 'kid', 'child', 'story', 'stories', 'bedtime', 'learning for',
         'कथा', 'कहानी', 'कहानि', 'बच्च',
@@ -465,7 +518,9 @@
         'ਕਥਾ', 'ਕਹਾਣੀ', 'ਬੱਚ', 'ਬਚਿਆਂ',
         'કથા', 'વાર્તા', 'બાળક', 'છોકરા',
         // Not Bengali "কথা": it means "talk", as in "কথা বলুন".
-        'গল্প', 'শিশু', 'বাচ্চা', 'ছোটদের', 'ছেলেমেয়ে'] },
+        'গল্প', 'শিশু', 'বাচ্চা', 'ছোটদের', 'ছেলেমেয়ে',
+        // Whole forms of "child", not the stem "بچ", which also starts "بچت" (savings).
+        'کتھا', 'کہانی', 'بچے', 'بچوں', 'بچہ'] },
     { id: 'noorjyoti', href: 'index.html#noorjyoti',
       keywords: ['noor', 'jyoti', 'literacy', 'book', 'read', 'library',
         'नूर', 'ज्योति', 'साक्षरता', 'किताब', 'पुस्तक', 'पढ़',
@@ -474,7 +529,8 @@
         'నూర్', 'జ్యోతి', 'అక్షరాస్యత', 'పుస్తక', 'చదువు', 'చదవ', 'గ్రంథాలయ',
         'ਨੂਰ', 'ਜੋਤੀ', 'ਜਯੋਤੀ', 'ਸਾਖਰਤਾ', 'ਕਿਤਾਬ', 'ਪੁਸਤਕ', 'ਪੜ੍ਹ',
         'નૂર', 'જ્યોતિ', 'સાક્ષરતા', 'પુસ્તક', 'ચોપડી', 'વાંચ',
-        'নূর', 'জ্যোতি', 'সাক্ষরতা', 'বই', 'পড়', 'গ্রন্থাগার'] },
+        'নূর', 'জ্যোতি', 'সাক্ষরতা', 'বই', 'পড়', 'গ্রন্থাগার',
+        'نور', 'جیوتی', 'جوتی', 'خواندگی', 'کتاب', 'پڑھ', 'لائبریری'] },
     { id: 'mission', href: 'index.html#mission',
       keywords: ['mission', 'about', 'who are you', 'why', 'nonprofit', 'foundation', 'values',
         'मिशन', 'उद्देश्य', 'लक्ष्य', 'हमारे बारे', 'फ़ाउंडेशन', 'फाउंडेशन', 'संस्था',
@@ -483,7 +539,8 @@
         'లక్ష్య', 'ఉద్దేశ', 'మా గురించి', 'ఫౌండేషన్', 'లాభాపేక్ష',
         'ਮਿਸ਼ਨ', 'ਉਦੇਸ਼', 'ਮਕਸਦ', 'ਟੀਚਾ', 'ਸਾਡੇ ਬਾਰੇ', 'ਫਾਊਂਡੇਸ਼ਨ', 'ਸੰਸਥਾ',
         'મિશન', 'ઉદ્દેશ', 'હેતુ', 'લક્ષ્ય', 'અમારા વિશે', 'ફાઉન્ડેશન', 'સંસ્થા',
-        'লক্ষ্য', 'উদ্দেশ্য', 'মিশন', 'আমাদের সম্পর্কে', 'ফাউন্ডেশন', 'সংস্থা'] },
+        'লক্ষ্য', 'উদ্দেশ্য', 'মিশন', 'আমাদের সম্পর্কে', 'ফাউন্ডেশন', 'সংস্থা',
+        'مشن', 'مقصد', 'ہدف', 'ہمارے بارے', 'فاؤنڈیشن', 'ادارہ', 'غیر منافع'] },
     { id: 'programs', href: 'index.html#programs',
       keywords: ['program', 'everything', 'all', 'what do you do', 'services', 'content',
         'कार्यक्रम', 'सभी', 'सब कुछ', 'सेवा',
@@ -492,7 +549,8 @@
         'కార్యక్రమ', 'అన్ని', 'అన్నీ', 'సేవ',
         'ਪ੍ਰੋਗਰਾਮ', 'ਸਾਰੇ', 'ਸਭ ਕੁਝ', 'ਸੇਵਾ',
         'કાર્યક્રમ', 'બધા', 'બધું', 'સેવા',
-        'কর্মসূচি', 'কার্যক্রম', 'সব', 'সমস্ত', 'পরিষেবা', 'সেবা'] }
+        'কর্মসূচি', 'কার্যক্রম', 'সব', 'সমস্ত', 'পরিষেবা', 'সেবা',
+        'پروگرام', 'تمام', 'سب کچھ', 'سبھی', 'خدمات'] }
   ];
 
   // The skills grid: one tile per existing section of index.html.
@@ -514,10 +572,15 @@
   // Keeps letters, combining marks (Indic vowel signs) and digits in any script and drops
   // zero-width (non-)joiners, which Telugu and Tamil keyboards insert inside words;
   // NFC makes precomposed and decomposed forms (e.g. "ड़") compare equal.
+  // For Urdu it also drops optional vowel marks and tatweel, and maps Arabic-keyboard letters
+  // to their Urdu forms (ي/ى -> ی, ك -> ک, ه -> ہ) so either keyboard matches.
   function normalize(text) {
     return String(text == null ? '' : text)
       .normalize('NFC')
-      .replace(/[\u200c\u200d]/g, '')
+      .replace(/[\u200c\u200d\u0640\u064b-\u065f\u0670]/g, '')
+      .replace(/[\u064a\u0649]/g, '\u06cc')
+      .replace(/\u0643/g, '\u06a9')
+      .replace(/\u0647/g, '\u06c1')
       .toLowerCase()
       .replace(/[^\p{L}\p{M}\p{N}\s]/gu, ' ')
       .replace(/\s+/g, ' ')

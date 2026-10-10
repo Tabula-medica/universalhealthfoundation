@@ -84,7 +84,7 @@ test('every link target exists as an id in index.html', () => {
 
 test('every locale has exactly the same keys as en, all non-empty', () => {
   const en = Object.keys(J.STRINGS.en).sort();
-  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['bn', 'en', 'gu', 'hi', 'pa', 'ta', 'te', 'zh']);
+  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['bn', 'en', 'gu', 'hi', 'pa', 'ta', 'te', 'ur', 'zh']);
   for (const loc of Object.keys(J.STRINGS).filter((l) => l !== 'en')) {
     assert.deepEqual(Object.keys(J.STRINGS[loc]).sort(), en, loc);
     for (const k of en) assert.ok(J.STRINGS[loc][k].trim().length > 0, loc + ' ' + k);
@@ -217,6 +217,38 @@ test('Gujarati and Bengali health questions get the disclaimer in the chosen lan
   assert.equal(route('চিকিত্\u200dসা').intent, 'health');
 });
 
+test('Urdu commands route like their English equivalents', () => {
+  assert.equal(route('صحت ریڈیو سنیں').intent, 'radio');
+  assert.equal(route('بچوں کی کہانیاں').intent, 'katha');
+  assert.equal(route('خواندگی پروگرام').intent, 'noorjyoti');
+  assert.equal(route('آپ کا مشن کیا ہے؟').intent, 'mission');
+  assert.equal(route('تمام پروگرام دکھائیں').intent, 'programs');
+  assert.equal(route('میں عطیہ کیسے دوں؟').intent, 'donate');
+  assert.equal(route('رضاکار بننا ہے').intent, 'donate');
+  assert.equal(route('مدد').intent, 'help');
+  // "سنہ" (year) is not "listen"; "بچت" (savings) is not "children".
+  assert.equal(route('سنہ ۲۰۲۶').intent, 'unknown');
+  assert.equal(route('بچت کیسے کریں').intent, 'unknown');
+});
+
+test('Urdu health questions get the disclaimer in Urdu', () => {
+  const r = J.routeCommand('بخار کے لیے کون سی دوا لوں؟', 'ur');
+  assert.equal(r.intent, 'health');
+  assert.equal(r.disclaimer, J.STRINGS.ur['health.disclaimer']);
+});
+
+test('Urdu matching ignores Arabic-keyboard letters, vowel marks and tatweel', () => {
+  assert.equal(route('\u0643تاب').intent, 'noorjyoti');      // Arabic kaf
+  assert.equal(route('عط\u064a\u0647').intent, 'donate');   // Arabic yeh + heh
+  assert.equal(route('د\u064eوا').intent, 'health');         // zabar
+  assert.equal(route('ری\u0640ڈیو').intent, 'radio');        // tatweel
+});
+
+test('Urdu is the only right-to-left locale', () => {
+  const rtl = J.LOCALES.filter((l) => l.dir === 'rtl').map((l) => l.code);
+  assert.deepEqual(rtl, ['ur']);
+});
+
 test('zero-width joiners inside words do not break matching', () => {
   assert.equal(J.normalize('ఫౌండేషన్\u200cలో'), 'ఫౌండేషన్లో');
   assert.equal(route('ఫౌండేషన్\u200cలో').intent, 'mission');
@@ -262,6 +294,8 @@ test('resolveLocale picks the first supported language', () => {
   assert.equal(J.resolveLocale(['pa-Arab', 'hi']), 'hi');
   assert.equal(J.resolveLocale(['gu-IN']), 'gu');
   assert.equal(J.resolveLocale(['bn-BD']), 'bn');
+  assert.equal(J.resolveLocale(['ur-PK']), 'ur');
+  assert.equal(J.resolveLocale(['ur-IN']), 'ur');
   assert.equal(J.resolveLocale(['fr']), 'en');
   assert.equal(J.resolveLocale([]), 'en');
 });
