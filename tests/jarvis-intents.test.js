@@ -84,7 +84,7 @@ test('every link target exists as an id in index.html', () => {
 
 test('every locale has exactly the same keys as en, all non-empty', () => {
   const en = Object.keys(J.STRINGS.en).sort();
-  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['bn', 'en', 'gu', 'hi', 'pa', 'ta', 'te', 'ur', 'zh']);
+  assert.deepEqual(Object.keys(J.STRINGS).sort(), ['bn', 'en', 'gu', 'hi', 'or', 'pa', 'ta', 'te', 'ur', 'zh']);
   for (const loc of Object.keys(J.STRINGS).filter((l) => l !== 'en')) {
     assert.deepEqual(Object.keys(J.STRINGS[loc]).sort(), en, loc);
     for (const k of en) assert.ok(J.STRINGS[loc][k].trim().length > 0, loc + ' ' + k);
@@ -217,6 +217,34 @@ test('Gujarati and Bengali health questions get the disclaimer in the chosen lan
   assert.equal(route('চিকিত্\u200dসা').intent, 'health');
 });
 
+test('Odia commands route like their English equivalents', () => {
+  assert.equal(route('ସ୍ୱାସ୍ଥ୍ୟ ରେଡିଓ ଶୁଣନ୍ତୁ').intent, 'radio');
+  assert.equal(route('ପିଲାଙ୍କ ଗପ').intent, 'katha');
+  assert.equal(route('ସାକ୍ଷରତା କାର୍ଯ୍ୟକ୍ରମ').intent, 'noorjyoti');
+  assert.equal(route('ଆପଣଙ୍କ ଲକ୍ଷ୍ୟ କ’ଣ?').intent, 'mission');
+  assert.equal(route('ସମସ୍ତ କାର୍ଯ୍ୟକ୍ରମ ଦେଖାନ୍ତୁ').intent, 'programs');
+  assert.equal(route('ମୁଁ କିପରି ଦାନ କରିବି?').intent, 'donate');
+  assert.equal(route('ମୁଁ ଯୋଗ ଦେବାକୁ ଚାହେଁ').intent, 'donate');
+  assert.equal(route('ସାହାଯ୍ୟ').intent, 'help');
+  // "read" with and without nukta (ପଢ଼ / ପଢ).
+  assert.equal(route('ବହି ପଢ଼ିବାକୁ ଚାହେଁ').intent, 'noorjyoti');
+  assert.equal(route('ବହି ପଢିବାକୁ ଚାହେଁ').intent, 'noorjyoti');
+  // "କଥା" means "talk", not stories; "ଦାନ" must not match inside "ପ୍ରଦାନ" (provide).
+  assert.equal(route('ଆପଣଙ୍କ ସହ କଥା ହେବାକୁ ଚାହେଁ').intent, 'unknown');
+  assert.equal(route('ସୂଚନା ପ୍ରଦାନ').intent, 'unknown');
+});
+
+test('Odia health questions get the disclaimer, with either spelling of "fever"', () => {
+  for (const q of ['ଜ୍ୱର ପାଇଁ କେଉଁ ଔଷଧ ଖାଇବି?', 'ଜ୍ବର ହେଉଛି']) {
+    const r = J.routeCommand(q, 'or');
+    assert.equal(r.intent, 'health', q);
+    assert.equal(r.disclaimer, J.STRINGS.or['health.disclaimer']);
+  }
+  // "ଲକ୍ଷଣ" (symptom) and "ଲକ୍ଷ୍ୟ" (goal) share a prefix but must not collide.
+  assert.equal(route('ଲକ୍ଷଣ').intent, 'health');
+  assert.equal(route('ଲକ୍ଷ୍ୟ').intent, 'mission');
+});
+
 test('Urdu commands route like their English equivalents', () => {
   assert.equal(route('صحت ریڈیو سنیں').intent, 'radio');
   assert.equal(route('بچوں کی کہانیاں').intent, 'katha');
@@ -296,6 +324,7 @@ test('resolveLocale picks the first supported language', () => {
   assert.equal(J.resolveLocale(['bn-BD']), 'bn');
   assert.equal(J.resolveLocale(['ur-PK']), 'ur');
   assert.equal(J.resolveLocale(['ur-IN']), 'ur');
+  assert.equal(J.resolveLocale(['or-IN']), 'or');
   assert.equal(J.resolveLocale(['fr']), 'en');
   assert.equal(J.resolveLocale([]), 'en');
 });
